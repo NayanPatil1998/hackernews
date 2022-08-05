@@ -13,9 +13,10 @@ import { Post } from "../types/types";
 dayjs.extend(relativeTime);
 
 interface PostProps {
-  post: Post
+  post: Post;
+  isOnPostScreen: boolean;
 }
-const PostComponent: React.FC<PostProps> = ({post}) => {
+const PostComponent: React.FC<PostProps> = ({ post, isOnPostScreen }) => {
   const bgColor = useColorModeValue("white", "#1a1a1b");
   // const queryClient = useQueryClient();
   const router = useRouter();
@@ -60,7 +61,7 @@ const PostComponent: React.FC<PostProps> = ({post}) => {
             fontWeight="bold"
             fontSize="22"
           >
-            {post.points || '🍆'}
+            {post.points || "🍆"}
           </Text>
           <Text>Points</Text>
         </Flex>
@@ -82,18 +83,33 @@ const PostComponent: React.FC<PostProps> = ({post}) => {
                 <a>{dayjs(post.created_at).fromNow()}</a>
               </Text>
             </HStack>
-            <Link href={`/post/${post.objectID}`}>
+            {isOnPostScreen ? (
               <Box width="full">
-                 {
-                  post.title ? <Text fontWeight="bold" fontSize="2xl">
-                  {post.title }
-                </Text>: <Text fontSize="xl" fontStyle="italic" color="grey">
-                [Post has no title]
-              </Text>
-
-                 } 
+                {post.title ? (
+                  <Text fontWeight="bold" fontSize="2xl">
+                    {post.title}
+                  </Text>
+                ) : (
+                  <Text fontSize="xl" fontStyle="italic" color="grey">
+                    [Post has no title]
+                  </Text>
+                )}
               </Box>
-            </Link>
+            ) : (
+              <Link href={`/post/${post.objectID}`}>
+                <Box width="full">
+                  {post.title ? (
+                    <Text fontWeight="bold" fontSize="2xl">
+                      {post.title}
+                    </Text>
+                  ) : (
+                    <Text fontSize="xl" fontStyle="italic" color="grey">
+                      [Post has no title]
+                    </Text>
+                  )}
+                </Box>
+              </Link>
+            )}
             <HStack
               alignSelf="start"
               alignItems="center"
@@ -102,7 +118,7 @@ const PostComponent: React.FC<PostProps> = ({post}) => {
             >
               <Icon color="grey" fontSize="20px" as={FaRegCommentAlt} />
               <Text fontSize="md" fontWeight="bold" color="grey">
-                {post.num_comments || 0} Comments
+                {post.children?.length || 0} Comments
               </Text>
             </HStack>
           </VStack>

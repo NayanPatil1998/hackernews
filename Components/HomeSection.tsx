@@ -59,7 +59,7 @@ const HomeSection = (props: Props) => {
       // console.table(response.data)
 
       if (response.status === 200) {
-        console.table(response.data);
+        // console.table(response.data);
         setSearchResults(response.data.hits);
         setIsLoading(false);
       }
@@ -114,7 +114,7 @@ const HomeSection = (props: Props) => {
       ) : (
         <VStack w="70vw" spacing={2}>
           {searchResults.map((post) => {
-            return <PostComponent post={post} key={post.objectID} />;
+            return <PostComponent isOnPostScreen={false} post={post} key={post.objectID} />;
           })}
         </VStack>
       )}
