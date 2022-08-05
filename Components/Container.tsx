@@ -9,8 +9,9 @@ export const Container = (props: any) => {
   return (
     <Box
       display="flex"
-      justifyContent="center"
-      alignItems="start"
+      flexDir="column"
+      alignItems="center"
+      justifyContent="start"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
       minH="100vh"

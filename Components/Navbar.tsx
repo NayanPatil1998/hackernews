@@ -15,6 +15,7 @@ const Navbar = (props: Props) => {
       bgColor={bgColor[colorMode]}
       px="10"
       py="5"
+      mb="10"
     >
       <Text
         fontSize={{
