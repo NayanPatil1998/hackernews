@@ -118,7 +118,7 @@ const PostComponent: React.FC<PostProps> = ({ post, isOnPostScreen }) => {
             >
               <Icon color="grey" fontSize="20px" as={FaRegCommentAlt} />
               <Text fontSize="md" fontWeight="bold" color="grey">
-                {post.children?.length || 0} Comments
+                {post.num_comments || post.children?.length || 0} Comments
               </Text>
             </HStack>
           </VStack>
